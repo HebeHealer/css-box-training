@@ -47,7 +47,72 @@ BFC的原理（BFC的渲染规则）
       2. float不为none；
       3. position的值不是relative或static；
       4. display为table相关；
+
+
+```
+
 BFC的使用场景
 1、垂直方向上计算父容器的高度
-2、水平方向上清除浮动
+```
+<section class="vertical-container">
+        <p>1</p>
+        <div class="bfc">
+            <p>2</p>
+        </div>
+        <p>3</p>
+    </section>
+```
+
+```
+.vertical-container .bfc {
+  overflow: hidden;
+}
+
+.vertical-container p {
+  margin: 5px auto 25px;
+  background-color: red;
+}
+```
+2、BFC不与float重叠
+```
+<section class="horizontal-container">
+        <div class="left"></div>
+        <div class="right"></div>
+    </section>
+```
+```
+.horizontal-container {
+    background-color: yellow;
+}
+
+.horizontal-container .left{
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-color: #090;
+}
+
+.horizontal-container .right{
+    height: 120px;
+    background-color: #ccc;
+    overflow: auto;
+}
+```
+3、水平方向上清除浮动
+```
+<section class="float-container">
+        <div class="float">balabalabala  BFC子元素是float也会参与计算， 清除浮动，对父元素创建BFC</div>
+    </section>
+```
+```
+.float-container {
+    overflow: auto;
+    /* float: left */
+    background-color: red;
+}
+
+.float-container .float {
+    float: left;
+    font-size: 30px;
+}
 ```
